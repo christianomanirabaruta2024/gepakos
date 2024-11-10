@@ -31,9 +31,9 @@ class Paroissiens
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\ManyToOne(targetEntity: Adresse::class)] // Relier à l'entité Adresse
+    #[ORM\ManyToOne(targetEntity: Adresses::class)] // Relier à l'entité Adresse
     #[ORM\JoinColumn(name: 'id_adresse', referencedColumnName: 'id_adresse', nullable: false)]
-    private ?Adresse $adresse = null;
+    private ?Adresses $adresse = null;
 
     // Getters et setters pour chaque attribut
 
