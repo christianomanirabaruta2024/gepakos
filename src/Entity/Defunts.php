@@ -10,9 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Defunts
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $id_defunt = null; // Utilisation de id_defunt comme clé primaire
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'bigint')]
+    private ?int $id_defunt = null; // Utilisation de 'int' pour l'identifiant
 
     #[ORM\ManyToOne(targetEntity: Paroissiens::class)]
     #[ORM\JoinColumn(name: 'id_paroissien', referencedColumnName: 'id_paroissien', nullable: false)]
@@ -33,16 +33,9 @@ class Defunts
     #[ORM\Column(length: 45)]
     private ?string $nom_conjoint_ou_pere = null;
 
-    public function getIdDefunt(): ?string
+    public function getIdDefunt(): ?int
     {
         return $this->id_defunt;
-    }
-
-    public function setIdDefunt(string $id_defunt): static
-    {
-        $this->id_defunt = $id_defunt;
-
-        return $this;
     }
 
     public function getParoissien(): ?Paroissiens

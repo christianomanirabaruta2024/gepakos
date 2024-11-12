@@ -10,9 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Confirmations
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $id_confirmation = null; // Utilisation de id_confirmation comme clé primaire
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'bigint')]
+    private ?int $id_confirmation = null; // Utilisation de 'int' pour l'identifiant
 
     #[ORM\ManyToOne(targetEntity: Paroissiens::class)] // Clé étrangère reliée à Paroissiens
     #[ORM\JoinColumn(name: "id_paroissien", referencedColumnName: "id_paroissien", nullable: false)]
@@ -27,16 +27,9 @@ class Confirmations
     #[ORM\Column(length: 45)]
     private ?string $ministre = null;
 
-    public function getIdConfirmation(): ?string
+    public function getIdConfirmation(): ?int
     {
         return $this->id_confirmation;
-    }
-
-    public function setIdConfirmation(string $id_confirmation): static
-    {
-        $this->id_confirmation = $id_confirmation;
-
-        return $this;
     }
 
     public function getParoissien(): ?Paroissiens

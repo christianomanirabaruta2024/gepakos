@@ -10,14 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Communions
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $id_communion = null; // Clé primaire modifiée ici
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'bigint')]
+    private ?int $id_communion = null; // Identifiant modifié ici en int
 
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $id_paroissien = null;
-
-    #[ORM\OneToOne(targetEntity: Paroissiens::class)] // Relier à l'entité Paroissiens
+    #[ORM\ManyToOne(targetEntity: Paroissiens::class)] // Relier à l'entité Paroissien
     #[ORM\JoinColumn(name: 'id_paroissien', referencedColumnName: 'id_paroissien', nullable: false)]
     private ?Paroissiens $paroissien = null;
 
@@ -30,27 +27,19 @@ class Communions
     #[ORM\Column(length: 50)]
     private ?string $ministre = null;
 
-    // Supprimer la fonction getId() car id n'existe plus
-    public function getIdCommunion(): ?string
+    public function getIdCommunion(): ?int
     {
         return $this->id_communion;
     }
 
-    public function setIdCommunion(string $id_communion): static
+    public function getParoissien(): ?Paroissiens
     {
-        $this->id_communion = $id_communion;
-
-        return $this;
+        return $this->paroissien;
     }
 
-    public function getIdParoissien(): ?string
+    public function setParoissien(?Paroissiens $paroissien): static
     {
-        return $this->id_paroissien;
-    }
-
-    public function setIdParoissien(string $id_paroissien): static
-    {
-        $this->id_paroissien = $id_paroissien;
+        $this->paroissien = $paroissien;
 
         return $this;
     }
