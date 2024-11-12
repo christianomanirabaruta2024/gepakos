@@ -13,22 +13,22 @@ class Paroissiens
     #[ORM\Column(type: Types::BIGINT)]
     private ?int $id_paroissien = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 30)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 25)]
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_naissance = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 30)]
     private ?string $lieu_naissance = null;
 
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 150, nullable: true)]
+    #[ORM\Column(length: 25, nullable: true)]
     private ?string $email = null;
 
     #[ORM\ManyToOne(targetEntity: Adresses::class)] // Relier à l'entité Adresse

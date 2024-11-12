@@ -16,16 +16,16 @@ class Adresses
     #[ORM\Column(length: 10)] // Taille plus réaliste pour le numéro de rue
     private ?string $numero_rue = null;
 
-    #[ORM\Column(length: 255)] // Nom de rue jusqu'à 255 caractères
+    #[ORM\Column(length: 25)] // Nom de rue jusqu'à 25 caractères
     private ?string $nom_rue = null;
 
-    #[ORM\Column(length: 100)] // Ville jusqu'à 100 caractères
+    #[ORM\Column(length: 30)] // Ville jusqu'à 30 caractères
     private ?string $ville = null;
 
     #[ORM\Column(length: 20)] // Code postal jusqu'à 20 caractères (permet de gérer les codes postaux longs comme ceux de certains pays)
     private ?string $code_postal = null;
 
-    #[ORM\Column(length: 50)] // Pays jusqu'à 50 caractères
+    #[ORM\Column(length: 25)] // Pays jusqu'à 25 caractères
     private ?string $pays = null;
 
     // Getters et setters pour chaque attribut
