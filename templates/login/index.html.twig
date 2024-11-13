@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de connexion
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+	<div class="wrapper">
+		<div class="left-part">
+			<div class="top-header">
+				<div class="logo">log</div>
+				<div class="title">GEPAKOS</div>
+			</div>
+			<div class="middle-part">
+				<h1>Se connecter</h1>
+				<p>Entrez vos informations pour vous authentifier</p>
+			</div>
+			<form id="login-form" action="{{ path('app_login') }}" method="post">
+				<div class="input">
+					<label for="first-input">Email / Nom d'utilisateur</label>
+					<input type="text" name="email" id="first-input" required>
+				</div>
+				<div class="input">
+					<label for="second-input">Mot de passe</label>
+					<div style="position: relative;">
+						<input type="password" name="password" id="second-input" required>
+						<button type="button" id="toggle-password" style="    position: absolute;
+							    right: 60px;
+							    top: 1px;
+							    outline: none;
+							    border: 0;
+							    background: transparent;
+							    font-size: 25px;">👁</button>
+					</div>
+				</div>
+
+				<div class="persist-remember">
+					<div class="remember-container">
+						<input type="checkbox" name="remember" id="checkbox">
+						<label for="checkbox">Se souvenir de moi</label>
+					</div>
+					<a href="/">Mot de passe oublié ?</a>
+				</div>
+
+				<div class="submit-button">
+					<input type="submit" value="Se connecter" id="submit-button">
+				</div>
+			</form>
+
+			<div id="response-message" style="margin-top: 20px; color: red;"></div>
+			<div id="loading" style="display: none;">Chargement...</div>
+
+			<div class="terms-conditions">
+				<div class="copy">
+					<a href="#">&copy; 2024</a>
+				</div>
+				<div class="terms">
+					<a href="#">Termes et conditions</a>
+				</div>
+				<div class="copy">
+					<a href="#">Comment ça fonctionne</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="right-part">
+			{# <div class="stash"></div>
+			<div class="cross"></div> #}
+			<img src="{{ asset('images/cathedrale.jpg') }}"/>
+		</div>
+	</div>
+
+	<!-- Script AJAX avec validation, blocage et affichage du mot de passe -->
+	<script>
+		document.getElementById('login-form').addEventListener('submit', function (event) {
+event.preventDefault();
+
+const emailInput = document.getElementById('first-input');
+const passwordInput = document.getElementById('second-input');
+const submitButton = document.getElementById('submit-button');
+const responseMessage = document.getElementById('response-message');
+const loadingMessage = document.getElementById('loading');
+
+responseMessage.textContent = '';
+loadingMessage.style.display = 'none';
+
+// Validation de l'email
+const email = emailInput.value;
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+if (! emailRegex.test(email)) {
+responseMessage.textContent = 'Veuillez entrer une adresse email valide.';
+responseMessage.style.color = 'red';
+return;
+}
+
+// Affiche le message de chargement et bloque le bouton
+loadingMessage.style.display = 'block';
+submitButton.disabled = true;
+
+const formData = new FormData(this);
+
+fetch(this.action, {
+method: 'POST',
+body: formData,
+headers: {
+'X-Requested-With': 'XMLHttpRequest'
+}
+}).then(response => response.json()).then(data => {
+loadingMessage.style.display = 'none';
+submitButton.disabled = false;
+
+if (data.status === 'success') {
+responseMessage.textContent = data.message;
+responseMessage.style.color = 'green';
+} else {
+responseMessage.textContent = data.message;
+responseMessage.style.color = 'red';
+}
+}).catch(error => {
+console.error('Erreur:', error);
+responseMessage.textContent = 'Une erreur est survenue. Veuillez réessayer plus tard.';
+responseMessage.style.color = 'red';
+loadingMessage.style.display = 'none';
+submitButton.disabled = false;
+});
+});
+
+// Script pour afficher ou masquer le mot de passe
+document.getElementById('toggle-password').addEventListener('click', function () {
+const passwordInput = document.getElementById('second-input');
+if (passwordInput.type === 'password') {
+passwordInput.type = 'text';
+this.textContent = '🙈';
+} else {
+passwordInput.type = 'password';
+this.textContent = '👁';
+}
+});
+	</script>
+{% endblock %}
