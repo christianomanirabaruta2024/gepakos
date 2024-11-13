@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Enum;
+
+enum Titres: string
+{
+    case PRETRE = 'prêtre';
+    case DIACRE = 'diacre';
+    case SEMINARISTE = 'séminariste';
+    case CATECHISTE = 'catéchiste';
+    case BENEVOLE = 'bénévole';
+    case CUISINIER = 'cuisinier';
+    case LAVADAIRE = 'lavadaire';
+    case SENTINELLE = 'sentinelle';
+    case TRAVAILLEUR = 'travailleur';
+}
