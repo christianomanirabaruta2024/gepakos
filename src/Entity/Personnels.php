@@ -14,12 +14,14 @@ class Personnels
     #[ORM\Column(type: 'bigint')]
     private ?string $id_personnel = null; // Utilisé comme clé primaire
 
-    #[ORM\ManyToOne(targetEntity: Paroissien::class)] // Relation avec l'entité Paroissien
+    #[ORM\ManyToOne(targetEntity: Paroissiens::class)] // Relation avec l'entité Paroissiens
     #[ORM\JoinColumn(name: 'id_paroissien', referencedColumnName: 'id_paroissien', nullable: true)] // L'id_paroissien est une clé étrangère
-    private ?Paroissien $paroissien = null; // L'entité liée
+    private ?Paroissiens $paroissien = null; // L'entité liée
 
-    #[ORM\Column(type: Types::BIGINT, nullable: true)]
-    private ?string $id_non_paroissien = null;
+    #[ORM\ManyToOne(targetEntity: NonParoissiens::class)] // Relation avec l'entité Paroissiens
+    #[ORM\JoinColumn(name: 'id_non_paroissien', referencedColumnName: 'id_non_paroissien', nullable: true)] // L'id_paroissien est une clé étrangère
+    private ?NonParoissiens $id_non_paroissien = null;
+
 
     #[ORM\Column(type: 'string', length: 50)]
     #[Assert\Choice(
@@ -39,23 +41,23 @@ class Personnels
         return $this;
     }
 
-    public function getIdParoissien(): ?Paroissien
+    public function getIdParoissien(): ?Paroissiens
     {
         return $this->paroissien;
     }
 
-    public function setIdParoissien(?Paroissien $paroissien): static
+    public function setIdParoissien(?Paroissiens $paroissien): static
     {
         $this->paroissien = $paroissien;
         return $this;
     }
 
-    public function getIdNonParoissien(): ?string
+    public function getIdNonParoissien(): ?NonParoissiens
     {
         return $this->id_non_paroissien;
     }
 
-    public function setIdNonParoissien(?string $id_non_paroissien): static
+    public function setIdNonParoissien(?NonParoissiens $id_non_paroissien): static
     {
         $this->id_non_paroissien = $id_non_paroissien;
         return $this;
