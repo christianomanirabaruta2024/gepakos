@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use App\Enum\Genre;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +34,9 @@ class Paroissiens
     #[ORM\ManyToOne(targetEntity: Adresses::class)] // Relier à l'entité Adresse
     #[ORM\JoinColumn(name: 'id_adresse', referencedColumnName: 'id_adresse', nullable: false)]
     private ?Adresses $adresse = null;
+
+    #[ORM\Column(type: 'string', enumType: Genre::class)] // Enum Type
+    private ?Genre $genre = null;
 
     // Getters et setters pour chaque attribut
 
@@ -116,6 +119,17 @@ class Paroissiens
     public function setAdresse(Adresses $adresse): static
     {
         $this->adresse = $adresse;
+        return $this;
+    }
+
+    public function getGenre(): ?Genre
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(Genre $genre): static
+    {
+        $this->genre = $genre;
         return $this;
     }
 }
