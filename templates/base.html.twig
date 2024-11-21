@@ -18,8 +18,8 @@
 			{{ encore_entry_script_tags('app') }}
 			{% block importmap %}
 				{{ importmap('app') }}
-			{% endblock %}
-		{% endblock %}
+			{% endblock %} 
+		{% endblock %} 
 	</head>
 	<body>
 		{% block body %}
@@ -27,4 +27,16 @@
 		{% endblock leftcomp %}
 		{% endblock %}
 	</body>
+	<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                alert.style.transition = 'opacity 0.5s ease-out';
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500); // Supprimer l'élément après l'animation
+            }, 5000); // Disparaît après 5 secondes
+        });
+    });
+</script>
 </html>

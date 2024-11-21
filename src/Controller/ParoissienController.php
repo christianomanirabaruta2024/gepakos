@@ -10,91 +10,91 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Paroissiens;
 use App\Entity\Adresses;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ParoissiensRepository;
 use App\Enum\Genre;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-
 
 class ParoissienController extends AbstractController
 {
-    #[Route('/paroissien', name: 'app_paroissien_index',methods: ['GET', 'POST'])]
-    public function index(): Response
+    #[Route('/paroissien', name: 'app_paroissien_index', methods: ['GET'])]
+    public function index(ParoissiensRepository $paroissiensRepository,LoggerInterface $logger,Request $request): Response
     {
+        $page = max((int) $request->query->get('page', 1), 1); // Récupère la page actuelle (par défaut 1)
+        $limit = 6; // Nombre d'éléments par page
+        // Récupération de tous les paroissiens
+        $pagination = $paroissiensRepository->findAllParoissiensWithAdresses($page,$limit);
+        $logger->info('Les données récupérées des paroissiens : ' . json_encode($pagination));
+
         return $this->render('paroissien/index.html.twig', [
-            'controller_name' => 'ParoissienController',
+           'pagination' => $pagination,
         ]);
     }
 
     #[Route('/paroissien/addnew/paroissien', name: 'app_paroissien_add_new', methods: ['GET', 'POST'])]
-    // Ajouter un nouveau paroissien
-    public function addNew(Request $request,
-     LoggerInterface $logger,
-     EntityManagerInterface $entityManager,
-     FlashBagInterface $flashBag): Response
+    public function addNew(Request $request, LoggerInterface $logger, EntityManagerInterface $entityManager): Response
     {
         if ($request->isMethod('POST')) {
             // Récupérer les données envoyées via POST
             $data = $request->request->all();
             $logger->info('Données soumises : ', $data);
-    
-            // Vérification des données requises
+
+            // Validation des données
             if (empty($data['roadnumber']) || empty($data['roadname']) || empty($data['city']) || empty($data['postale']) || empty($data['pays'])) {
-                return $this->json(['error' => 'Les informations d\'adresse sont manquantes.'], 400);
+                $this->addFlash('error', 'Les informations d\'adresse sont manquantes.');
+                return $this->redirectToRoute('app_paroissien_add_new');
             }
-    
-            // Vérifier que le genre est valide
+
             if (!isset($data['gerne']) || !in_array($data['gerne'], ['Masculin', 'Feminin'])) {
-                return $this->json(['error' => 'Le genre est obligatoire et doit être Masculin ou Feminin.'], 400);
+                $this->addFlash('error', 'Le genre est obligatoire et doit être Masculin ou Feminin.');
+                return $this->redirectToRoute('app_paroissien_add_new');
             }
-    
+
+            // Création des entités
             $paroissien = new Paroissiens();
             $adresse = new Adresses();
-    
+
             $adresse->setNumeroRue($data['roadnumber']);
             $adresse->setNomRue($data['roadname']);
             $adresse->setVille($data['city']);
             $adresse->setCodePostal($data['postale']);
             $adresse->setPays($data['pays']);
-    
+
             // Persist et flush pour enregistrer l'adresse
             $entityManager->persist($adresse);
             $entityManager->flush();
-    
-            // Validation de l'adresse et affectation des données au paroissien
-            if (!empty($adresse->getIdAdresse())) {
-                $paroissien->setAdresse($adresse);  // L'objet adresse est passé ici
-                $paroissien->setNom($data['firstname']);
-                $paroissien->setPrenom($data['lastname']);
-                $paroissien->setDateNaissance(new \DateTime($data['birthdate']));
-                $paroissien->setTelephone($data['numberphone']);
-                $paroissien->setEmail($data['email']);
-                $paroissien->setLieuNaissance($data['birthlocation']);
-    
-                // Exemple de gestion de l'enum pour le genre
-                if ($data['gerne'] === "Masculin") {
-                    $paroissien->setGenre(Genre::HOMME); // À ajuster en fonction de l'input 'gerne'
-                }
-                if ($data['gerne'] === "Feminin") {
-                    $paroissien->setGenre(Genre::FEMME); // À ajuster en fonction de l'input 'gerne'
-                }
-    
-                // Persist et flush pour enregistrer le paroissien
-                $entityManager->persist($paroissien);
-                $entityManager->flush();
-    
-                $flashBag->add('success', 'Paroissien ajouté avec succès !');
 
-                // Rediriger vers la page d'index avec le message flash
-                return $this->redirectToRoute('app_paroissien_index');
+            // Affectation des données au paroissien
+            $paroissien->setAdresse($adresse);
+            $paroissien->setNom($data['firstname']);
+            $paroissien->setPrenom($data['lastname']);
+            $paroissien->setDateNaissance(new \DateTime($data['birthdate']));
+            $paroissien->setTelephone($data['numberphone']);
+            $paroissien->setEmail($data['email']);
+            $paroissien->setLieuNaissance($data['birthlocation']);
+
+            if ($data['gerne'] === "Masculin") {
+                $paroissien->setGenre(Genre::HOMME);
+            } elseif ($data['gerne'] === "Feminin") {
+                $paroissien->setGenre(Genre::FEMME);
             }
+
+            // Persist et flush pour enregistrer le paroissien
+            $entityManager->persist($paroissien);
+            $entityManager->flush();
+
+            // Ajouter un message de succès
+            $this->addFlash('success', 'Paroissien ajouté avec succès !');
+
+            // Rediriger vers la page d'index
+            return $this->redirectToRoute('app_paroissien_add_new');
         }
-    
+
         // Logique pour GET : afficher le formulaire
         return $this->render('paroissien/addnew.html.twig', [
             'controller_name' => 'ParoissienController',
         ]);
     }
-    
+
+
     
 
 

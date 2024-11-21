@@ -16,6 +16,15 @@ class BaptemesRepository extends ServiceEntityRepository
         parent::__construct($registry, Baptemes::class);
     }
 
+    public function countBapteme(): int
+        {
+            return (int) $this->createQueryBuilder('b')
+                ->select('COUNT(b.id_bapteme)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+
+
     //    /**
     //     * @return Baptemes[] Returns an array of Baptemes objects
     //     */

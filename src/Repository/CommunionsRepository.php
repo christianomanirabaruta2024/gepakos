@@ -15,7 +15,13 @@ class CommunionsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Communions::class);
     }
-
+    public function countCommunion(): int
+    {
+        return (int) $this->createQueryBuilder('b')
+            ->select('COUNT(b.id_communion)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
     //    /**
     //     * @return Communions[] Returns an array of Communions objects
     //     */

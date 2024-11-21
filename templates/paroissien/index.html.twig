@@ -5,7 +5,7 @@
 	<main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
 		<div class="container px-6 py-8 mx-auto">
 			<div class="flex justify-between relative">
-				<h3 class="text-3xl font-medium text-gray-700">Liste des poroissien</h3>
+				<h3 class="text-3xl font-medium text-gray-700">Liste des paroissien</h3>
 
 
 				<button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
@@ -96,400 +96,166 @@
 									<tr>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Nus
+												ordre
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Paroisse de
+												Nom
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Nomen
+												prenom
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Domicilium
+												Date de Naissance
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Baptizatus
+												Lieu de Naissance
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Com.prima
+												telephone
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												com.solen
+												email
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												comfirmatus
+												gerne
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Matrimonium
+												Numero de la rue
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Natus
+												Nom de la rue
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Peter
+												ville
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Meter
+												code postale
 											</p>
 										</th>
 										<th class="p-4 border-b border-slate-200 bg-slate-50">
 											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Patrinus
+												pays
 											</p>
 										</th>
-										<th class="p-4 border-b border-slate-200 bg-slate-50">
-											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												Matrina
-											</p>
-										</th>
-										<th class="p-4 border-b border-slate-200 bg-slate-50">
-											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
-												IMP/PASIKA
-											</p>
-										</th>
+										
 									</tr>
 								</thead>
 								<tbody>
+								    {% for paroissien in pagination.data %}
 									<tr class="hover:bg-slate-50 border-b border-slate-200">
 										<td class="p-4 py-4">
-											<p class="block font-semibold text-sm text-slate-500">39733A</p>
+										<p class="block font-semibold text-sm text-slate-500">{{ paroissien.idParoissien }}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Mpanuka</p>
+											<p class="text-sm text-slate-500">{{paroissien.nom}}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Arsene NDAYAMBAJE</p>
+											<p class="text-sm text-slate-500">{{paroissien.prenom}}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Kamushiha</p>
+											<p class="text-sm text-slate-500">{{ paroissien.dateNaissance|date('d/m/Y') }}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Murayi 30/03/2002</p>
+											<p class="text-sm text-slate-500">{{paroissien.lieuNaissance}}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
+											<p class="text-sm text-slate-500">{{paroissien.telephone}}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
+											<p class="text-sm text-slate-500">{{paroissien.email}}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Murayi 13/07/2002</p>
+											<p class="text-sm text-slate-500">{{ paroissien.genre.value }}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
+										{% if paroissien.adresse %}
+										
+										<p class="text-sm text-slate-500">{{ paroissien.adresse.numeroRue }}</p>
+										{% else %}
+										<p class="text-sm text-slate-500">Adresse inconnue</p>
+										{% endif %}
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">1988</p>
+											<p class="text-sm text-slate-500">{{paroissien.adresse.nomRue}}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Sylvestre GAHUNGU</p>
+											<p class="text-sm text-slate-500">{{paroissien.adresse.ville}}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Fernande SIMBAHWANIJE</p>
+											<p class="text-sm text-slate-500">{{paroissien.adresse.codePostal}}</p>
 										</td>
 										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Donatien GATOGATO</p>
+											<p class="text-sm text-slate-500">{{paroissien.adresse.pays}}</p>
 										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">
-												<button imperezwa-modal-target="imperezwapopup-modal" imperezwa-modal-toggle="imperezwapopup-modal">Details</button>
-											</p>
-										</td>
+						
 									</tr>
-									<tr class="hover:bg-slate-50 border-b border-slate-200">
-										<td class="p-4 py-4">
-											<p class="block font-semibold text-sm text-slate-500">76483B</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Nyamirambo</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Jean KANOBANA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Kigali</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Gisozi 15/05/2000</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Nyamirambo 20/07/2000</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">1995</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Emmanuel HABIMANA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Claudine MUKANKURANGA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Laurent KABANDA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Details</p>
-										</td>
-									</tr>
-
-									<tr class="hover:bg-slate-50 border-b border-slate-200">
-										<td class="p-4 py-4">
-											<p class="block font-semibold text-sm text-slate-500">54321C</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Butare</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Alice UWIMANA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Huye</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Muhanga 18/09/1998</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Huye 05/11/1998</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">1990</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Fulgence MUGISHA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Diane MUKAMA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Jean Pierre KANYAMIBWA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Details</p>
-										</td>
-									</tr>
-
-									<tr class="hover:bg-slate-50 border-b border-slate-200">
-										<td class="p-4 py-4">
-											<p class="block font-semibold text-sm text-slate-500">87465D</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Muhanga</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">David NZABANDORA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Gitarama</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Ruhango 12/02/1995</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Muhanga 25/03/1995</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">1989</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Alphonse NIYONSHUTI</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Marie Claire UWERA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Bernard NSHIMIYIMANA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Details</p>
-										</td>
-									</tr>
-
-									<tr class="hover:bg-slate-50 border-b border-slate-200">
-										<td class="p-4 py-4">
-											<p class="block font-semibold text-sm text-slate-500">32987E</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Rwamagana</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Patrick KAGABO</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Rukomo</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Nyagatare 20/12/1997</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Rwamagana 02/01/1998</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">1992</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Jean Bosco NYIRIMANA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Martha MUKANDARWA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Samuel KAMIKAZI</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Details</p>
-										</td>
-									</tr>
-
-									<tr class="hover:bg-slate-200 border-b border-slate-200">
-										<td class="p-4 py-4">
-											<p class="block font-semibold text-sm text-slate-500">18274F</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Kibungo</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Sarah UMWIRIGI</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Kayonza</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Gatsibo 08/08/2001</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Kibungo 19/09/2001</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">1998</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Gabriel RUSATIRA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Marie Jeanne UWERA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">James HAKIZIMANA</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">-</p>
-										</td>
-										<td class="p-4 py-4">
-											<p class="text-sm text-slate-500">Details</p>
-										</td>
-									</tr>
-
+									{% else %}
+										<tr>
+											<td colspan="3">Aucun paroissien trouvé.</td>
+										</tr>
+									{% endfor %}
 								</tbody>
 							</table>
 						</div>
 
 
 						<div class="flex justify-between items-center px-4 py-3">
+							<!-- Affichage des informations de pagination -->
 							<div class="text-sm text-slate-500">
-								Showing
-								<b>1-6</b>
-								of 45
+								Visibles de
+								<b>
+									{{ (pagination.page - 1) * pagination.limit + 1 }} -
+									{{ pagination.page * pagination.limit > pagination.total ? pagination.total : pagination.page * pagination.limit }}
+								</b>
+								sur {{ pagination.total }}
 							</div>
+
+							<!-- Boutons de navigation -->
 							<div class="flex space-x-1">
-								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
-									Prev
-								</button>
-								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-white bg-slate-800 border border-slate-800 rounded hover:bg-slate-600 hover:border-slate-600 transition duration-200 ease">
-									1
-								</button>
-								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
-									2
-								</button>
-								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
-									3
-								</button>
-								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
-									Next
-								</button>
+								<!-- Bouton "Précédent" -->
+								<a href="{{ pagination.page > 1 ? path('app_paroissien_index', { page: pagination.page - 1 }) : '#' }}"
+								class="flex justify-between items-center px-3 py-1 min-w-9 min-h-9 text-sm font-normal {{ pagination.page > 1 ? 'text-slate-500 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-400' : 'text-gray-300 bg-gray-100 border-gray-200 cursor-not-allowed' }} rounded transition duration-200 ease">
+									Precendent
+								</a>
+
+								<!-- Boutons pour chaque page -->
+								{% for i in 1..pagination.pages %}
+									<a href="{{ path('app_paroissien_index', { page: i }) }}"
+									class="px-3 flex justify-between items-center  py-1 min-w-9 min-h-9 text-sm font-normal {{ i == pagination.page ? 'text-white bg-slate-800 border-slate-800 hover:bg-slate-600 hover:border-slate-600' : 'text-slate-500 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-400' }} rounded transition duration-200 ease">
+										{{ i }}
+									</a>
+								{% endfor %}
+
+								<!-- Bouton "Suivant" -->
+								<a href="{{ pagination.page < pagination.pages ? path('app_paroissien_index', { page: pagination.page + 1 }) : '#' }}"
+								class=" flex justify-between items-center px-3 py-1 min-w-9 min-h-9 text-sm font-normal {{ pagination.page < pagination.pages ? 'text-slate-500 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-400' : 'text-gray-300 bg-gray-100 border-gray-200 cursor-not-allowed' }} rounded transition duration-200 ease">
+									Suivant
+								</a>
 							</div>
 						</div>
+
 					</div>
 
 

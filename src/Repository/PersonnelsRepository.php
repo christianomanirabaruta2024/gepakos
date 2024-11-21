@@ -15,7 +15,13 @@ class PersonnelsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Personnels::class);
     }
-
+    public function countPersonnel(): int
+    {
+        return (int) $this->createQueryBuilder('b')
+            ->select('COUNT(b.id_personnel)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
     //    /**
     //     * @return Personnels[] Returns an array of Personnels objects
     //     */

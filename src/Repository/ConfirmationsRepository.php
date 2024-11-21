@@ -15,6 +15,13 @@ class ConfirmationsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Confirmations::class);
     }
+    public function countConfirmation(): int
+    {
+        return (int) $this->createQueryBuilder('b')
+            ->select('COUNT(b.id_confirmation)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
     //    /**
     //     * @return Confirmations[] Returns an array of Confirmations objects

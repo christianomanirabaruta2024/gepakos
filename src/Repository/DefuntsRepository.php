@@ -15,6 +15,13 @@ class DefuntsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Defunts::class);
     }
+    public function countDefunct(): int
+    {
+        return (int) $this->createQueryBuilder('b')
+            ->select('COUNT(b.id_defunt)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
     //    /**
     //     * @return Defunts[] Returns an array of Defunts objects

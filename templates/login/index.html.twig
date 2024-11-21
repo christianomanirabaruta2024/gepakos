@@ -77,69 +77,77 @@
 
 	<!-- Script AJAX avec validation, blocage et affichage du mot de passe -->
 	<script>
-		document.getElementById('login-form').addEventListener('submit', function (event) {
-event.preventDefault();
+	document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('login-form');
+    const emailInput = document.getElementById('first-input');
+    const passwordInput = document.getElementById('second-input');
+    const togglePassword = document.getElementById('toggle-password');
+    const responseMessage = document.getElementById('response-message');
+    const loadingMessage = document.getElementById('loading');
+    const submitButton = document.getElementById('submit-button');
 
-const emailInput = document.getElementById('first-input');
-const passwordInput = document.getElementById('second-input');
-const submitButton = document.getElementById('submit-button');
-const responseMessage = document.getElementById('response-message');
-const loadingMessage = document.getElementById('loading');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-responseMessage.textContent = '';
-loadingMessage.style.display = 'none';
+        // Réinitialiser les messages d'erreur
+        responseMessage.textContent = '';
+        responseMessage.classList.add('hidden');
+        loadingMessage.classList.remove('hidden');
+        submitButton.disabled = true;
 
-// Validation de l'email
-const email = emailInput.value;
-const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-if (! emailRegex.test(email)) {
-responseMessage.textContent = 'Veuillez entrer une adresse email valide.';
-responseMessage.style.color = 'red';
-return;
-}
+        // Validation de l'email
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        if (!emailRegex.test(emailInput.value)) {
+            responseMessage.textContent = 'Veuillez entrer une adresse email valide.';
+            responseMessage.style.color = 'red';
+            responseMessage.classList.remove('hidden');
+            loadingMessage.classList.add('hidden');
+            submitButton.disabled = false;
+            return;
+        }
 
-// Affiche le message de chargement et bloque le bouton
-loadingMessage.style.display = 'block';
-submitButton.disabled = true;
+        // Préparer la requête
+        const formData = new FormData(form);
 
-const formData = new FormData(this);
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
 
-fetch(this.action, {
-method: 'POST',
-body: formData,
-headers: {
-'X-Requested-With': 'XMLHttpRequest'
-}
-}).then(response => response.json()).then(data => {
-loadingMessage.style.display = 'none';
-submitButton.disabled = false;
+            const data = await response.json();
+            loadingMessage.classList.add('hidden');
+            submitButton.disabled = false;
 
-if (data.status === 'success') {
-responseMessage.textContent = data.message;
-responseMessage.style.color = 'green';
-} else {
-responseMessage.textContent = data.message;
-responseMessage.style.color = 'red';
-}
-}).catch(error => {
-console.error('Erreur:', error);
-responseMessage.textContent = 'Une erreur est survenue. Veuillez réessayer plus tard.';
-responseMessage.style.color = 'red';
-loadingMessage.style.display = 'none';
-submitButton.disabled = false;
+            responseMessage.textContent = data.message;
+            responseMessage.style.color = data.status === 'success' ? 'green' : 'red';
+            responseMessage.classList.remove('hidden');
+
+            if (data.status === 'success') {
+                setTimeout(() => window.location.href = '/', 2000); // Redirection après succès
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            responseMessage.textContent = 'Une erreur est survenue. Veuillez réessayer plus tard.';
+            responseMessage.style.color = 'red';
+            responseMessage.classList.remove('hidden');
+            loadingMessage.classList.add('hidden');
+            submitButton.disabled = false;
+        }
+    });
+
+    // Afficher ou masquer le mot de passe
+    togglePassword.addEventListener('click', () => {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            togglePassword.textContent = '🙈';
+        } else {
+            passwordInput.type = 'password';
+            togglePassword.textContent = '👁';
+        }
+    });
 });
-});
 
-// Script pour afficher ou masquer le mot de passe
-document.getElementById('toggle-password').addEventListener('click', function () {
-const passwordInput = document.getElementById('second-input');
-if (passwordInput.type === 'password') {
-passwordInput.type = 'text';
-this.textContent = '🙈';
-} else {
-passwordInput.type = 'password';
-this.textContent = '👁';
-}
-});
 	</script>
 {% endblock %}

@@ -15,7 +15,13 @@ class MariagesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Mariages::class);
     }
-
+    public function countMariage(): int
+    {
+        return (int) $this->createQueryBuilder('b')
+            ->select('COUNT(b.id_mariage)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 //    /**
 //     * @return Mariages[] Returns an array of Mariages objects
 //     */

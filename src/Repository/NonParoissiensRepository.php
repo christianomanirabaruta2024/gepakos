@@ -16,6 +16,14 @@ class NonParoissiensRepository extends ServiceEntityRepository
         parent::__construct($registry, NonParoissiens::class);
     }
 
+    public function countNonParoissien(): int
+    {
+        return (int) $this->createQueryBuilder('b')
+            ->select('COUNT(b.id_non_paroissien)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return NonParoissiens[] Returns an array of NonParoissiens objects
 //     */
