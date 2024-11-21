@@ -6,7 +6,13 @@
 	<div class="container px-6 py-2 mx-auto">
 		<h3 class="text-2xl font-medium text-gray-700">Ajout d'un Nouveau non paroissien</h3>
 	</div>
-	<form id="multi-step-form" class="w-4/5 m-auto">
+	{% for message in app.flashes('success') %}
+    <div class="alert absolute right-5 top-20 p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+		<span class="font-medium">Info alert!</span> {{message}}
+	</div>
+	{% endfor %}
+	<form id="multi-step-form" class="w-4/5 m-auto " action="{{ path('app_non_paroissien_add_new') }}" method="POST">
+	
 		<ol class="flex items-center w-full text-sm text-gray-500 font-medium sm:text-base mb-10">
 			<li class="flex md:w-full items-center text-indigo-600  sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4 xl:after:mx-8 ">
 				<div class="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2 ">
@@ -17,11 +23,11 @@
 				<div class="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2 ">
 					<span class="w-6 h-6 bg-gray-100 border border-gray-200 rounded-full flex justify-center items-center mr-3 lg:w-10 lg:h-10">2</span>Adresse de la personne
 				</div>
-			</li>
+			</li> 
 			<li class="flex md:w-full items-center text-gray-600 ">
 				<div class="flex items-center  ">
 					<span class="w-6 h-6 bg-gray-100 border border-gray-200 rounded-full flex justify-center items-center mr-3 lg:w-10 lg:h-10">3</span>
-					Confirmation
+					comfession
 				</div>
 			</li>
 		</ol>
@@ -30,22 +36,23 @@
 			<div class="grid gap-4 mb-5 md:grid-cols-2">
 				<div>
 					<label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Nom</label>
-					<input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="Doe" required/>
+					<input type="text" id="last_name" name="lastname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="Doe" required/>
 				</div>
 				<div>
 					<label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Prénom</label>
-					<input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="John" required/>
+					<input type="text" name="firstname" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="John" required/>
 				</div>
 
 			</div>
 			<div class="grid gap-4 mb-5 md:grid-cols-2">
 				<div>
 					<label for="birth_date" class="block mb-2 text-sm font-medium text-gray-900 ">Date de naissance</label>
-					<input type="date" id="birth_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="20/11/2002" required/>
+					<input type="date" name="birthdate" id="birth_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="20/11/2002" required/>
 				</div>
+				
 				<div>
 					<label for="birth_location" class="block mb-2 text-sm font-medium text-gray-900 ">lieu de naissance</label>
-					<input type="text" id="birth_location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="Nyabiharage" required/>
+					<input type="text" name="birthlocation" id="birth_location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="Nyabiharage" required/>
 				</div>
 			</div>
 
@@ -53,21 +60,25 @@
 			<div class="grid gap-4 mb-5 md:grid-cols-2">
 				<div>
 					<label for="number_phone" class="block mb-2 text-sm font-medium text-gray-900 ">Telephone</label>
-					<input type="tel" id="number_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"/>
+					<input type="tel" name="numberphone" id="number_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"/>
 				</div>
 				<div>
 					<label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
-					<input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="janeiro@gmail.com"/>
+					<input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="janeiro@gmail.com"/>
 				</div>
 			</div>
 			<div class="grid gap-4 mb-5 md:grid-cols-2">
 				<div>
-					<label for="small_select" class="block mb-2 text-sm font-medium text-gray-600 w-full">Gerne</label>
-					<select id="small_select" class="h-auto border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-1.5 px-2 focus:outline-none">
+					<label for="gerne" class="block mb-2 text-sm font-medium text-gray-600 w-full">Gerne</label>
+					<select id="gerne" name="gerne" class="h-auto border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-1.5 px-2 focus:outline-none">
 						<option selected>A Quel gerne</option>
 						<option value="Masculin">Masculin</option>
 						<option value="Feminin">Feminin</option>
 					</select>
+				</div>
+				<div>
+					<label for="comfession" class="block mb-2 text-sm font-medium text-gray-900 ">comfession</label>
+					<input type="text" name="comfession" id="comfession" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="janeiro@gmail.com"/>
 				</div>
 			</div>
 			<button type="button" class="next-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-next="2">Suivant</button>
@@ -78,26 +89,26 @@
 			<div class="grid gap-4 mb-5 md:grid-cols-2">
 				<div>
 					<label for="road_name" class="block mb-2 text-sm font-medium text-gray-900 ">Nom de la route</label>
-					<input type="text" id="road_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="avenue de nyabiharage" required/>
+					<input type="text" name="roadname" id="road_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="avenue de nyabiharage" required/>
 				</div>
 				<div>
 					<label for="road_number" class="block mb-2 text-sm font-medium text-gray-900 ">Numero de la rue</label>
-					<input type="text" id="road_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="John" required/>
+					<input type="text" name="roadnumber" id="road_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="John" required/>
 				</div>
 
 			</div>
 			<div class="grid gap-4 mb-5 md:grid-cols-2">
 				<div>
 					<label for="city" class="block mb-2 text-sm font-medium text-gray-900 ">Ville</label>
-					<input type="text" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="avenue de nyabiharage" required/>
+					<input type="text" name="city" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="avenue de nyabiharage" required/>
 				</div>
 				<div>
 					<label for="postale" class="block mb-2 text-sm font-medium text-gray-900 ">Code postale</label>
-					<input type="text" id="postale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="John" required/>
+					<input type="text" name="postale" id="postale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="John" required/>
 				</div>
 				<div>
-					<label for="postale" class="block mb-2 text-sm font-medium text-gray-900 ">Code postale</label>
-					<input type="text" id="postale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="John" required/>
+					<label for="pays" class="block mb-2 text-sm font-medium text-gray-900 ">pays</label>
+					<input type="text" name="pays" id="pays" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" placeholder="John" required/>
 				</div>
 
 			</div>
@@ -107,7 +118,7 @@
 
 		<!-- Étape 3 -->
 		<div class="step" id="step-3" style="display:none;">
-			<div class="grid gap-4 mb-5 md:grid-cols-2 bg-white px-5 py-10 rounded-lg " >
+			<div class="grid gap-4 mb-5 md:grid-cols-2 bg-white px-5 py-10 rounded-lg ">
 				<div>
 					<div class="grid gap-2 mb-3 md:grid-cols-2">
 						<span class="text-blue-500">Nom :
@@ -176,7 +187,7 @@
 				</div>
 			</div>
 			<button type="button" class="prev-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-prev="2">Précédent</button>
-			<button type="button" class="submit-btn text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Soumettre</button>
+			<button type="submit" id="submit-btn" class="submit-btn text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Soumettre</button>
 		</div>
 	</form>
 

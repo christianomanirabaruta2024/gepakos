@@ -1,55 +1,527 @@
 {% extends 'inscriptions/index.html.twig' %}
-
-{% block title %}Baptemes
+{% block title %}Les baptemes
 {% endblock %}
-
 {% block main %}
-
-
-	<form class="w-4/5 m-auto">
-		<div class="grid gap-4 mb-10  md:grid-cols-2">
-			<div>
-				<label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">First name</label>
-				<input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required/>
+	<main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+		<div class="container px-6 py-8 mx-auto">
+			<div class="flex justify-between relative">
+				<h3 class="text-3xl font-medium text-gray-700">Liste des baptemes</h3>
+				<button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+					Ajouter
+				</button>
+				<div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+					<div class="relative p-4 w-full max-w-md max-h-full justify-self-end mt-16">
+						<div class="relative bg-white rounded-lg shadow ">
+							<button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+								<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 14">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+								</svg>
+								<span class="sr-only">Close modal</span>
+							</button>
+							<div class="p-4 md:p-5 text-center">
+								<h3 class="mb-5 text-sm font-normal text-red ">Quel bapteme voulez vous enregister ?</h3>
+								<div class="flex justify-between w-3/5 m-auto">
+									<a href="{{path('app_new_add_bapteme')}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nouveaux</a>
+									<a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ancien</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div>
-				<label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Last name</label>
-				<input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
+			<div id="imperezwa-modal" tabindex="-1" class="hidden overflow-y-hidden overflow-x-hidden backdrop-brightness-90 fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+				<div class="relative py-4 w-full max-w-xl  justify-self-center h-svh overflow-auto">
+					<div class="relative bg-white rounded-lg shadow ">
+						<button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" imperezwa-modal-hide="imperezwapopup-modal">
+							<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 14">
+								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+							</svg>
+							<span class="sr-only">Close modal</span>
+						</button>
+						<div class="p-4 md:p-5 text-center">
+							<h3 class="mb-5 text-sm font-normal text-red border-b-2 border-black">IMPEREZWA/PASIKA</h3>
+							<div class="grid gap-4 grid-cols-2  w-full">
+								<div class="border-r-2 border-black">
+									<div class="justify-self-start mb-3">12-3-2002</div>
+									<div class="justify-self-start mb-3">12-3-2002</div>
+									<div class="justify-self-start mb-3">12-3-2002</div>
+									<div class="justify-self-start mb-3">12-3-2002</div>
+									<div class="justify-self-start mb-3">12-3-2002</div>
+									<div class="justify-self-start mb-3">12-3-2002</div>
+									<div class="justify-self-start mb-3">12-3-2002</div>
+									<div class="justify-self-start mb-3">12-3-2002</div>
+								</div>
+								<div>2</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div>
-				<label for="company" class="block mb-2 text-sm font-medium text-gray-900 ">Company</label>
-				<input type="text" id="company" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Flowbite" required/>
-			</div>
-			<div>
-				<label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">Phone number</label>
-				<input type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required/>
-			</div>
-			<div>
-				<label for="website" class="block mb-2 text-sm font-medium text-gray-900 ">Website URL</label>
-				<input type="url" id="website" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="flowbite.com" required/>
-			</div>
-			<div>
-				<label for="visitors1" class="block mb-2 text-sm font-medium text-gray-900 ">Unique visitors (per month)</label>
-				<input type="number" id="visitors1" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required/>
-			</div>
-			<div>
-				<label for="visitors2" class="block mb-2 text-sm font-medium text-gray-900 ">Unique visitors (per month)</label>
-				<input type="number" id="visitors2" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required/>
-			</div>
-			<div>
-				<label for="visitors3" class="block mb-2 text-sm font-medium text-gray-900 ">Unique visitors (per month)</label>
-				<input type="number" id="visitors3" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required/>
-			</div>
-			<div>
-				<label for="visitors4" class="block mb-2 text-sm font-medium text-gray-900 ">Unique visitors (per month)</label>
-				<input type="number" id="visitors4" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required/>
-			</div>
-			<div>
-				<label for="visitors5" class="block mb-2 text-sm font-medium text-gray-900 ">Unique visitors (per month)</label>
-				<input type="number" id="visitors5" class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required/>
+			<div class="mt-4">
+				<div
+					class=" mx-auto">
+					{# <div class="w-full flex justify-between items-center mb-3 mt-1 pl-3">
+																																																																																																																				<div>
+																																																																																																																					<h3 class="text-lg font-semibold text-slate-800">Projects with Invoices</h3>
+																																																																																																																					<p class="text-slate-500">Overview of the current activities.</p>
+																																																																																																																				</div>
+																																																																																																																				<div class="ml-3">
+																																																																																																																					<div class="w-full max-w-sm min-w-[200px] relative">
+																																																																																																																						<div class="relative">
+																																																																																																																							<input class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md" placeholder="Search for invoice..."/>
+																																																																																																																							<button class="absolute h-8 w-8 right-1 top-1 my-auto px-2 flex items-center bg-white rounded " type="button">
+																																																																																																																								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8 text-slate-600">
+																																																																																																																									<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+																																																																																																																								</svg>
+																																																																																																																							</button>
+																																																																																																																						</div>
+																																																																																																																					</div>
+																																																																																																																				</div>
+																																																																																																																			</div> #}
+					<div class="relative flex flex-col w-full h-full  text-gray-700 bg-white shadow-md rounded-lg  bg-clip-border">
+						<div class="overflow-x-auto rounded-lg ">
+							<table class="w-full text-left table-auto min-w-max ">
+								<thead>
+									<tr>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Nus
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Paroisse de
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Nomen
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Domicilium
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Baptizatus
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Com.prima
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												com.solen
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												comfirmatus
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Matrimonium
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Natus
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Peter
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Meter
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Patrinus
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												Matrina
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												IMP/PASIKA
+											</p>
+										</th>
+										<th class="p-4 border-b border-slate-200 bg-slate-50">
+											<p class="text-sm font-normal leading-none text-slate-800 font-semibold">
+												status
+											</p>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="hover:bg-slate-50 border-b border-slate-200">
+										<td class="p-4 py-4">
+											<p class="block font-semibold text-sm text-slate-500">39733A</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Mpanuka</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Arsene NDAYAMBAJE</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Kamushiha</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Murayi 30/03/2002</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Murayi 13/07/2002</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">1988</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Sylvestre GAHUNGU</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Fernande SIMBAHWANIJE</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Donatien GATOGATO</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">
+												<button imperezwa-modal-target="imperezwapopup-modal" imperezwa-modal-toggle="imperezwapopup-modal">Details</button>
+											</p>
+										</td>
+										<td class="p-4 py-4">
+											<span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Rejete</span>
+										</td>
+									</tr>
+									<tr class="hover:bg-slate-50 border-b border-slate-200">
+										<td class="p-4 py-4">
+											<p class="block font-semibold text-sm text-slate-500">76483B</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Nyamirambo</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Jean KANOBANA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Kigali</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Gisozi 15/05/2000</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Nyamirambo 20/07/2000</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">1995</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Emmanuel HABIMANA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Claudine MUKANKURANGA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Laurent KABANDA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Details</p>
+										</td>
+										<td class="p-4 py-4">
+										<span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Accepte</span>
+										</td>
+									</tr>
+									<tr class="hover:bg-slate-50 border-b border-slate-200">
+										<td class="p-4 py-4">
+											<p class="block font-semibold text-sm text-slate-500">54321C</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Butare</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Alice UWIMANA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Huye</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Muhanga 18/09/1998</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Huye 05/11/1998</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">1990</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Fulgence MUGISHA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Diane MUKAMA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Jean Pierre KANYAMIBWA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Details</p>
+										</td>
+										<td class="p-4 py-4">
+										<span class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">En cours</span>
+										</td>
+									</tr>
+									<tr class="hover:bg-slate-50 border-b border-slate-200">
+										<td class="p-4 py-4">
+											<p class="block font-semibold text-sm text-slate-500">87465D</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Muhanga</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">David NZABANDORA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Gitarama</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Ruhango 12/02/1995</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Muhanga 25/03/1995</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">1989</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Alphonse NIYONSHUTI</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Marie Claire UWERA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Bernard NSHIMIYIMANA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Details</p>
+										</td>
+									</tr>
+									<tr class="hover:bg-slate-50 border-b border-slate-200">
+										<td class="p-4 py-4">
+											<p class="block font-semibold text-sm text-slate-500">32987E</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Rwamagana</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Patrick KAGABO</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Rukomo</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Nyagatare 20/12/1997</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Rwamagana 02/01/1998</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">1992</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Jean Bosco NYIRIMANA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Martha MUKANDARWA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Samuel KAMIKAZI</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Details</p>
+										</td>
+									</tr>
+									<tr class="hover:bg-slate-200 border-b border-slate-200">
+										<td class="p-4 py-4">
+											<p class="block font-semibold text-sm text-slate-500">18274F</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Kibungo</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Sarah UMWIRIGI</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Kayonza</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Gatsibo 08/08/2001</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Kibungo 19/09/2001</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">1998</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Gabriel RUSATIRA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Marie Jeanne UWERA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">James HAKIZIMANA</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">-</p>
+										</td>
+										<td class="p-4 py-4">
+											<p class="text-sm text-slate-500">Details</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="flex justify-between items-center px-4 py-3">
+							<div class="text-sm text-slate-500">
+								Showing
+								<b>1-6</b>
+								of 45
+							</div>
+							<div class="flex space-x-1">
+								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+									Prev
+								</button>
+								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-white bg-slate-800 border border-slate-800 rounded hover:bg-slate-600 hover:border-slate-600 transition duration-200 ease">
+									1
+								</button>
+								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+									2
+								</button>
+								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+									3
+								</button>
+								<button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+									Next
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-	</form>
-
+	</main>
+	<script>
+//const document.querySelectorAll('[data-modal-toggle="popup-modal"]') = document.querySelectorAll('[data-modal-toggle="popup-modal"]');
+//const document.querySelectorAll('[data-modal-hide="popup-modal"]'); = document.querySelectorAll('[data-modal-hide="popup-modal"]');
+//const modal = document.getElementById('popup-modal');
+// pour imperezwa pop up
+// const imperezwatoggleButtons = document.querySelectorAll('[imperezwa-modal-toggle="imperezwapopup-modal"]');
+// const imperezwacloseButtons = document.querySelectorAll('[imperezwa-modal-hide="imperezwapopup-modal"]');
+// const imperezwamodal = document.getElementById('imperezwa-modal');
+// pour imperezwa visibility
+document.querySelectorAll('[imperezwa-modal-toggle="imperezwapopup-modal"]').forEach(button => {
+button.addEventListener('click', () => {
+document.getElementById('imperezwa-modal').classList.toggle('hidden');
+});
+});
+// pour imperezwa hidden
+document.querySelectorAll('[imperezwa-modal-hide="imperezwapopup-modal"]').forEach(button => {
+button.addEventListener('click', () => {
+document.getElementById('imperezwa-modal').classList.add('hidden');
+});
+});
+// Toggle modal visibility
+document.querySelectorAll('[data-modal-toggle="popup-modal"]').forEach(button => {
+button.addEventListener('click', () => {
+document.getElementById('popup-modal').classList.toggle('hidden');
+});
+});
+// Hide modal
+document.querySelectorAll('[data-modal-hide="popup-modal"]').forEach(button => {
+button.addEventListener('click', () => {
+document.getElementById('popup-modal').classList.add('hidden');
+});
+});
+	</script>
 {% endblock main %}

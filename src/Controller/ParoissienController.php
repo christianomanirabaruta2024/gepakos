@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ParoissiensRepository;
 use Psr\Log\LoggerInterface;
 use App\Entity\Paroissiens;
 use App\Entity\Adresses;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\ParoissiensRepository;
 use App\Enum\Genre;
 
 class ParoissienController extends AbstractController
@@ -19,7 +19,7 @@ class ParoissienController extends AbstractController
     public function index(ParoissiensRepository $paroissiensRepository,LoggerInterface $logger,Request $request): Response
     {
         $page = max((int) $request->query->get('page', 1), 1); // Récupère la page actuelle (par défaut 1)
-        $limit = 6; // Nombre d'éléments par page
+        $limit = 5; // Nombre d'éléments par page
         // Récupération de tous les paroissiens
         $pagination = $paroissiensRepository->findAllParoissiensWithAdresses($page,$limit);
         $logger->info('Les données récupérées des paroissiens : ' . json_encode($pagination));
@@ -99,7 +99,7 @@ class ParoissienController extends AbstractController
 
 
     #[Route('/paroissien/addold/paroissien', name: 'app_paroissien_add_old')]
-    // ajouter un encien paroissien
+    // ajouter un Ancien paroissien
     public function addOld(): Response
     {
         return $this->render('paroissien/addold.html.twig', [

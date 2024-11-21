@@ -15,4 +15,12 @@ class BaptemeController extends AbstractController
             'controller_name' => 'BaptemeController',
         ]);
     }
+
+    #[Route('/bapteme/add/new', name: 'app_new_add_bapteme')]
+    public function addNewBapteme(): Response
+    {
+        return $this->render('bapteme/addBaptemes.html.twig', [
+            'controller_name' => 'add baptemes',
+        ]);
+    }
 }
