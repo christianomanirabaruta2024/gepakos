@@ -14,9 +14,9 @@ class Personnels
     #[ORM\Column(type: 'bigint')]
     private ?string $id_personnel = null; // Utilisé comme clé primaire
 
-    #[ORM\ManyToOne(targetEntity: Paroissiens::class)] // Relation avec l'entité Paroissiens
-    #[ORM\JoinColumn(name: 'id_paroissien', referencedColumnName: 'id_paroissien', nullable: true)] // L'id_paroissien est une clé étrangère
-    private ?Paroissiens $paroissien = null; // L'entité liée
+    #[ORM\ManyToOne(targetEntity: Baptemes::class)] // Relier à l'entité Baptemes
+    #[ORM\JoinColumn(name: 'id_bapteme', referencedColumnName: 'id_bapteme', nullable: false)]
+    private ?Baptemes $bapteme = null;
 
     #[ORM\ManyToOne(targetEntity: NonParoissiens::class)] // Relation avec l'entité Paroissiens
     #[ORM\JoinColumn(name: 'id_non_paroissien', referencedColumnName: 'id_non_paroissien', nullable: true)] // L'id_paroissien est une clé étrangère
@@ -41,16 +41,18 @@ class Personnels
         return $this;
     }
 
-    public function getIdParoissien(): ?Paroissiens
+    public function getBapteme(): ?Baptemes
     {
-        return $this->paroissien;
+        return $this->bapteme;
     }
 
-    public function setIdParoissien(?Paroissiens $paroissien): static
+    public function setBaptemes(?Baptemes $bapteme): static
     {
-        $this->paroissien = $paroissien;
+        $this->bapteme = $bapteme;
+
         return $this;
     }
+
 
     public function getIdNonParoissien(): ?NonParoissiens
     {

@@ -14,9 +14,9 @@ class Confirmations
     #[ORM\Column(type: 'bigint')]
     private ?int $id_confirmation = null; // Utilisation de 'int' pour l'identifiant
 
-    #[ORM\ManyToOne(targetEntity: Paroissiens::class)] // Clé étrangère reliée à Paroissiens
-    #[ORM\JoinColumn(name: "id_paroissien", referencedColumnName: "id_paroissien", nullable: false)]
-    private ?Paroissiens $paroissien = null;
+    #[ORM\ManyToOne(targetEntity: Communions::class)] // Clé étrangère reliée à Communions
+    #[ORM\JoinColumn(name: "id_communion", referencedColumnName: "id_communion", nullable: false)]
+    private ?Communions $communion = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_confirmation = null;
@@ -32,14 +32,14 @@ class Confirmations
         return $this->id_confirmation;
     }
 
-    public function getParoissien(): ?Paroissiens
+    public function getCommunion(): ?Communions
     {
-        return $this->paroissien;
+        return $this->communion;
     }
 
-    public function setParoissien(Paroissiens $paroissien): static
+    public function setCommunion(Communions $communion): static
     {
-        $this->paroissien = $paroissien;
+        $this->communion = $communion;
 
         return $this;
     }

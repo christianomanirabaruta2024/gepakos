@@ -15,13 +15,13 @@ class Mariages
     #[ORM\Column(type: Types::BIGINT)]
     private ?string $id_mariage = null;
 
-    #[ORM\ManyToOne(targetEntity: Paroissiens::class)]
-    #[ORM\JoinColumn(name: "id_epoux1", referencedColumnName: "id_paroissien", nullable: false)]
-    private ?Paroissiens $epoux1 = null;
+    #[ORM\ManyToOne(targetEntity: Confirmations::class)]
+    #[ORM\JoinColumn(name: "id_epoux1", referencedColumnName: "id_confirmation", nullable: false)]
+    private ?Confirmations $epoux1 = null;
 
-    #[ORM\ManyToOne(targetEntity: Paroissiens::class)]
-    #[ORM\JoinColumn(name: "id_epoux2_poroissien", referencedColumnName: "id_paroissien", nullable: true)]
-    private ?Paroissiens $epoux2Paroissien = null;
+    #[ORM\ManyToOne(targetEntity: Confirmations::class)]
+    #[ORM\JoinColumn(name: "id_epoux2_confirmation", referencedColumnName: "id_confirmation", nullable: true)]
+    private ?Confirmations $epoux2Confirmation = null;
 
     #[ORM\ManyToOne(targetEntity: NonParoissiens::class)]
     #[ORM\JoinColumn(name: "id_epoux2_non_paroissien", referencedColumnName: "id_non_paroissien", nullable: true)]
@@ -44,25 +44,25 @@ class Mariages
         return $this->id_mariage;
     }
 
-    public function getEpoux1(): ?Paroissiens
+    public function getEpoux1(): ?Confirmations
     {
         return $this->epoux1;
     }
 
-    public function setEpoux1(Paroissiens $epoux1): static
+    public function setEpoux1(Confirmations $epoux1): static
     {
         $this->epoux1 = $epoux1;
         return $this;
     }
 
-    public function getEpoux2Paroissien(): ?Paroissiens
+    public function getEpoux2Confirmation(): ?Confirmations
     {
-        return $this->epoux2Paroissien;
+        return $this->epoux2Confirmation;
     }
 
-    public function setEpoux2Paroissien(?Paroissiens $epoux2Paroissien): static
+    public function setEpoux2Confirmation(?Confirmations $epoux2Confirmation): static
     {
-        $this->epoux2Paroissien = $epoux2Paroissien;
+        $this->epoux2Confirmation = $epoux2Confirmation;
         return $this;
     }
 

@@ -14,9 +14,9 @@ class Defunts
     #[ORM\Column(type: 'bigint')]
     private ?int $id_defunt = null; // Utilisation de 'int' pour l'identifiant
 
-    #[ORM\ManyToOne(targetEntity: Paroissiens::class)]
-    #[ORM\JoinColumn(name: 'id_paroissien', referencedColumnName: 'id_paroissien', nullable: false)]
-    private ?Paroissiens $paroissien = null;
+    #[ORM\ManyToOne(targetEntity: Baptemes::class)] // Relier à l'entité Baptemes
+    #[ORM\JoinColumn(name: 'id_bapteme', referencedColumnName: 'id_bapteme', nullable: false)]
+    private ?Baptemes $bapteme = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_defunt = null;
@@ -38,14 +38,14 @@ class Defunts
         return $this->id_defunt;
     }
 
-    public function getParoissien(): ?Paroissiens
+    public function getBapteme(): ?Baptemes
     {
-        return $this->paroissien;
+        return $this->bapteme;
     }
 
-    public function setParoissien(?Paroissiens $paroissien): static
+    public function setBaptemes(?Baptemes $bapteme): static
     {
-        $this->paroissien = $paroissien;
+        $this->bapteme = $bapteme;
 
         return $this;
     }
